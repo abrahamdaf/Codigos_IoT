@@ -1,16 +1,24 @@
+#include <SoftwareSerial.h>
+#define pin1 13
+#define pin2 12
+#define pin3 14
+#define pin4 4
+#define pin5 5
+#define pin6 16
 void setup() {
-  pinMode(4, INPUT);
-  pinMode(12, INPUT);
-  Serial.begin(115200);
+  pinMode(pin1, INPUT);
+  Serial1.begin(9600);
+  Serial.begin(9600);
   
 }
+
 bool a, b;
+bool prev [6];
+bool next [6];
 void loop() {
-  a = digitalRead(4);
-  b = digitalRead(12);
-  Serial.print("a=");
-  Serial.println(a);
-  Serial.print("b=");
-  Serial.println(b);
-  delay(500);
+  a = digitalRead(pin1);
+  String str = String(a)+ "," + String(0);
+  Serial1.println(str);
+  Serial.println(str);
+
 }
