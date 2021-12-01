@@ -1,3 +1,5 @@
+#include <ESP8266WiFi.h>
+#include "FirebaseESP8266.h"
 #include <SoftwareSerial.h>
 #define pin1 13
 #define pin2 12
@@ -5,6 +7,16 @@
 #define pin4 4
 #define pin5 5
 #define pin6 16
+
+#define ssid "DAF_Lago_Nogal"
+#define password "3336574030"
+
+#define API_key "AIzaSyDBmwBEgAqANg0TyISjGtwhqjRnv9vzCpg"
+
+const char *FIREBASE_HOST= "https://reto-estacionamiento-default-rtdb.fivrebaseio.com/"
+const char *FIREBASE_AUTH= "4cdpt5Qc5ut5GCawjaTvH7PpePK5yP5mG0qxTICH"
+
+FirebaseData firebaseData;
 void setup() {
   pinMode(pin1, INPUT);
   pinMode(pin2, INPUT);
@@ -14,6 +26,19 @@ void setup() {
   pinMode(pin6, INPUT);
   Serial1.begin(9600);
   Serial.begin(9600);
+
+  WiFi.begin(ssid, password);
+
+  while(WiFi.status() != WL_CONNECTED)
+  {
+    Serial.print(".");
+    delay(250);
+  }
+  Serial.print("\nConectado al Wi-Fi");
+  Serial.println();
+
+  Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
+  Firebase.reconnectWiFi(true);
   
 }
 
