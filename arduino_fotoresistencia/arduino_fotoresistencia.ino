@@ -8,12 +8,21 @@ pinMode(4, OUTPUT);
 pinMode(5, OUTPUT);
 pinMode(6, OUTPUT);
 pinMode(7, OUTPUT);
+pinMode(8, OUTPUT);
+pinMode(9, OUTPUT);
+pinMode(10, OUTPUT);
+pinMode(11, OUTPUT);
+pinMode(12, OUTPUT);
+pinMode(13, OUTPUT);
 
 }
+String seccion;
 String variables [6];
  
 void loop() { // run over and over
   if (Serial1.available()) {
+    seccion = Serial1.readStringUntil(',');
+    Serial.read();
     variables [0] = Serial1.readStringUntil(',');
     Serial.read();
     variables [1] = Serial1.readStringUntil(',');
@@ -33,7 +42,11 @@ void loop() { // run over and over
       }else{
         temp = false;
       }
-      digitalWrite(i, temp);
+      if(seccion == "b"){
+        digitalWrite(i+6, temp);
+      }else if(seccion == "a"){
+         digitalWrite(i, temp);
+      }
     }
   }
 }
