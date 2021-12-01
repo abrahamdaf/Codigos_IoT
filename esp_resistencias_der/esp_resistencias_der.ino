@@ -21,7 +21,7 @@ bool prev [6] {1,1,1,1,1,1};
 bool next [6];
 bool dif = 0;
 void sendValues(){
-  String message = "a," + String (next[0]) + "," + String (next[1]) + "," + String (next[2]) +
+  String message = "b," + String (next[0]) + "," + String (next[1]) + "," + String (next[2]) +
   "," + String (next[3]) + "," + String (next[4]) + "," + String (next[5]) + "\n";
   Serial1.print(message);
   Serial.print(message);
