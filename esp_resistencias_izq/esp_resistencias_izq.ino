@@ -8,13 +8,13 @@
 #define pin5 5
 #define pin6 16
 
-#define ssid "DAF_Lago_Nogal"
-#define password "3336574030"
+#define ssid "abradeal"
+#define password "no me acuerdo"
 
 #define API_key "AIzaSyDBmwBEgAqANg0TyISjGtwhqjRnv9vzCpg"
 
-const char *FIREBASE_HOST= "https://reto-estacionamiento-default-rtdb.fivrebaseio.com/"
-const char *FIREBASE_AUTH= "4cdpt5Qc5ut5GCawjaTvH7PpePK5yP5mG0qxTICH"
+const char *FIREBASE_HOST= "https://reto-estacionamiento-default-rtdb.firebaseio.com/";
+const char *FIREBASE_AUTH = "4cdpt5Qc5ut5GCawjaTvH7PpePK5yP5mG0qxTICH";
 
 FirebaseData firebaseData;
 void setup() {
@@ -42,7 +42,7 @@ void setup() {
   
 }
 
-bool prev [6] {1,1,1,1,1,1};
+bool prev [6] {0,0,0,0,0,0};
 bool next [6];
 bool dif = 0;
 void sendValues(){
@@ -52,6 +52,8 @@ void sendValues(){
   Serial.print(message);
 }
 
+String nodo = "Seccion A";
+String estado;
 void loop() {
   
   dif = 0;
@@ -64,6 +66,13 @@ void loop() {
   for (int i = 0; i < 6; i++){
     if(next[i] != prev[i]){
       dif = 1;
+      if(next[i] == 0){
+        estado = "Ocupado";
+      }
+      else{
+        estado = "Desocupado";
+      }
+      Firebase.setString(firebaseData, nodo + "/A" + String(i+1), estado);
     }
   }
   while(dif == 1){
