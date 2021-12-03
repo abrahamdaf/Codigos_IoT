@@ -8,8 +8,8 @@
 #define pin5 5
 #define pin6 16
 
-#define ssid "abradeal"
-#define password "no me acuerdo"
+#define ssid "DAF_Lago_Nogal"
+#define password "3336574030"
 
 #define API_key "AIzaSyDBmwBEgAqANg0TyISjGtwhqjRnv9vzCpg"
 
@@ -53,7 +53,7 @@ void sendValues(){
 }
 
 String nodo = "Seccion B";
-String estado;
+int estado;
 void loop() {
   
   dif = 0;
@@ -67,12 +67,12 @@ void loop() {
     if(next[i] != prev[i]){
       dif = 1;
       if(next[i] == 0){
-        estado = "Ocupado";
+        estado = 0;
       }
       else{
-        estado = "Desocupado";
+        estado = 1;
       }
-      Firebase.setString(firebaseData, nodo + "/B" + String(i+1), estado);
+      Firebase.setInt(firebaseData, nodo + "/B" + String(i+1), estado);
     }
   }
   while(dif == 1){
